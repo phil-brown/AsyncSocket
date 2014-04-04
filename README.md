@@ -1,7 +1,31 @@
 # AsyncSocket
-----------
 
 This is the master NIO Async Socket class. Supports UDP and TCP, IPv4 and IPv6, and both server and client connections.
+
+> Note: I created this code over a year ago. I will add to the documentation once I re-figure out how to use everything.
+
+# How to use
+
+1. Drop the `self.philbrown.asyncsocket` and `org.apache.http.conn.util` packages into your `src` directory. If you are developing on *Android*, you do not need the *Apache* package.
+2. A server can be created with:
+
+    AsyncSocket socket = AsyncSocket.initTcpIPv6();
+    socket.setSocketListener(new AsyncSocket.Listener() {
+        @Override
+        public void onDataReceived(AsyncSocket server, byte[] data) {
+            System.out.println("New Data Received: " + new String(data));
+        }
+
+        @Override
+        public void onDataSent(AsyncSocket client, byte[] data) {
+            //TODO
+        }
+    });
+    try {
+        socket.bindToPort(port);
+    } catch (IOException e) {
+        System.out.println("Unable to listen on busy port " + port);
+    }
 
 ## License
 
